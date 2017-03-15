@@ -18,11 +18,19 @@ import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 
+// Qa-Tool Services
+import { UserService } from './service/user.service.ts';
+
 // Application wide providers
 const APP_PROVIDERS = [
   AppState,
   GlobalState
 ];
+
+// Qa-Tool providers
+const QATOOL_PROVIDERS = [
+  UserService
+]
 
 export type StoreType = {
   state: InternalStateType,
@@ -50,7 +58,8 @@ export type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    QATOOL_PROVIDERS
   ]
 })
 
