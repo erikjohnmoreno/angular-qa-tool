@@ -1,1 +1,22 @@
-<h1>PROJECT LIST</h1>
+<h1>PROJECTS</h1>
+<table width="100%">
+    <thead>
+        <tr>
+            <th><strong>Name</strong></th>
+            <th><strong>Story Count</strong></th>
+            <th><strong>Bugs</strong></th>
+            <th><strong>Features</strong></th>
+            <th><strong>Total Points</strong></th>
+        </tr>
+    </thead>
+
+    <tbody *ngFor="let project of projects">
+        <tr>
+            <td>{{ project.name }}</td>
+            <td>{{ project.story_count }}</td>
+            <td>{{ project.bugs }}</td>
+            <td>{{ project.features }}</td>
+            <td>{{ project.total_points}}</td>
+        </tr>
+    </tbody>
+</table>

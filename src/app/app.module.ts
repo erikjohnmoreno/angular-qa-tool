@@ -19,7 +19,10 @@ import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 
 // Qa-Tool Services
-import { UserService } from './service/user.service.ts';
+import { SessionService } from './service/session.service';
+import { HttpService } from './service/http.service';
+import { ProjectService } from './service/project.service';
+import { CommonService } from './service/common.service';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -29,7 +32,10 @@ const APP_PROVIDERS = [
 
 // Qa-Tool providers
 const QATOOL_PROVIDERS = [
-  UserService
+  SessionService,
+  HttpService,
+  ProjectService,
+  CommonService
 ]
 
 export type StoreType = {

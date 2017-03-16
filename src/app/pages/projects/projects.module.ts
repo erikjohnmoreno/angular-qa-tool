@@ -10,5 +10,9 @@ import { routing } from './projects.routing';
         CommonModule,
         NgaModule,
         routing
+    ],
+    declarations: [
+        Projects
     ]
 })
+export class ProjectsModule {}
