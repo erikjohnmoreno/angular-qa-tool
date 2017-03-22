@@ -41,6 +41,7 @@ export class Home implements OnInit {
         private router: Router) {}
 
     ngOnInit() {
+        
         this.projectService.getProjects()
                            .subscribe(res => {
                             this.projects = res
@@ -127,5 +128,9 @@ export class Home implements OnInit {
         for (var d = new Date(first); d <= last; d.setDate(d.getDate() + 1)) {
             this.dates.push(new Date(d));
         }
+    }
+
+    someMethod() {
+        console.log("TESTING EVENTEMITTER");
     }
 }

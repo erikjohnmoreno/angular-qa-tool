@@ -1,10 +1,6 @@
 <style>
     .container-outer { overflow: scroll; width: 1200px;}
     .container-inner { width: 10000px; }
-    .borderify {
-        border-style: solid;
-        border-width: 1px;
-    }
 
     .day {
         margin: 2px;
@@ -14,39 +10,10 @@
         background-color: lightgray;
     }
 
-    .qa-name {
-        background-color: lightblue;
-        border-style: solid;
-        border-width: 1px;
-    }
     .panel {
         padding-bottom: 5px;
     }
 </style>
-
-<!--<table class="table table-bordered">
-    <tr>
-        <th *ngFor="let user of week_users">
-            <h2>{{ user.first_name }}</h2>
-            <tr *ngFor="let date of dates" align="center">
-                <h4>{{ date | date: 'EEEE' }}</h4>
-                <select #project>
-                    <option *ngFor="let project of projects" [value]="project.id">
-                        <span>{{ project.name }}</span>
-                    </option>
-                </select>
-                <button (click)="assign(project.value, user.id, date)">Assign</button>
-                <div *ngFor="let assignment of user.qa_assignments">
-                    <div *ngIf="assignment.date == (date | date: 'EEEE')">
-                        <a href>{{ assignment.project.name }}</a>
-                    </div>
-                </div>
-                <br>
-                <br>
-            </tr>
-        </th>
-    </tr>
-</table>-->
 
 <div class="container container-outer">
     <div class="panel panel-default">
@@ -67,7 +34,13 @@
     </div>
 
     <div class="container-inner">
-        <div *ngFor="let user of week_users" class="pull-left" style="margin-right:10px">
+        <assignments *ngIf="!!week_users" 
+            [weekUsers]="week_users"
+            [dates]="dates"
+            [projects]="projects"
+            (assign)="assign($event.projects, $event.user_id, $event.date)"></assignments>
+
+        <!--<div *ngFor="let user of week_users" class="pull-left" style="margin-right:10px">
             <div class="qa-name"><strong><h2>{{ user.first_name }}</h2></strong></div>
             <div style="background-color: gray; display: inline-block">
                 <div *ngFor="let date of dates" style="margin: 5px; background-color:white">
@@ -103,9 +76,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>
-
 
 <h1><a routerLink="/pages/projects">Projects</a></h1>
