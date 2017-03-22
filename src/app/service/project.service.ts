@@ -26,8 +26,17 @@ export class ProjectService {
         return this.http.get(this.projectUrl, { headers: headers })
                         .map(this.commonService.extractData)
                         .catch(this.commonService.handleError)
-        // let headers = new Headers({'Content-Type': 'application/json', 'Authorization': })
     }
 
+    projectAssign(project_id: number, user_id: number, date: string) {
+        let url = this.projectUrl + "/"+ project_id +"/add";
+        let headers = new Headers();
+        this.httpService.createAuthorizationHeader(headers);
+        let options = new RequestOptions({headers: headers});
+        
+        return this.http.post(url, options, {body: {user_id: user_id, date: date}})
+                        .map(this.commonService.extractData)
+                        .catch(this.commonService.handleError)
+    }
      
 }

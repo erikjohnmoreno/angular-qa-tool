@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
-
+import { DatePipe } from '@angular/common';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -22,6 +23,7 @@ import { PagesModule } from './pages/pages.module';
 import { SessionService } from './service/session.service';
 import { HttpService } from './service/http.service';
 import { ProjectService } from './service/project.service';
+import { UserService } from './service/user.service';
 import { CommonService } from './service/common.service';
 
 // Application wide providers
@@ -35,6 +37,7 @@ const QATOOL_PROVIDERS = [
   SessionService,
   HttpService,
   ProjectService,
+  UserService,
   CommonService
 ]
 
@@ -60,9 +63,11 @@ export type StoreType = {
     ReactiveFormsModule,
     NgaModule.forRoot(),
     PagesModule,
-    routing
+    routing,
+    Ng2AutoCompleteModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
+    DatePipe,
     ENV_PROVIDERS,
     APP_PROVIDERS,
     QATOOL_PROVIDERS

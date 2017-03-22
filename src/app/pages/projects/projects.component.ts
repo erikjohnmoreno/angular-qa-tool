@@ -9,8 +9,8 @@ import { ProjectService } from '../../service/project.service';
 
 export class Projects implements OnInit {
     projects;
-
-    constructor(private projectService: ProjectService) {}
+    constructor(
+        private projectService: ProjectService) {}
 
     ngOnInit() {
         this.projectService.getProjects()

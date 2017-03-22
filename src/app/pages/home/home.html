@@ -1,3 +1,71 @@
-<h1>HOME</h1>
+<style>
+    .container-outer { overflow: scroll; width: 1200px;}
+    .container-inner { width: 10000px; }
+    .borderify {
+        border-style: solid;
+        border-width: 2px;
+    }
+</style>
+<h1><button class="btn btn-sm btn-info" (click)="previousWeek()">previous</button> {{ firstdate | date: 'yyyy-MM-dd' }} to {{ lastdate | date: 'yyyy-MM-dd' }} <button class="btn btn-sm btn-info" (click)="nextWeek()">next</button></h1>
+
+<div *ngFor="let error of errors">
+    <div *ngIf="is_error" class="alert alert-danger">
+        <strong>{{ error }}</strong>
+    </div>
+</div>
+<!--<table class="table table-bordered">
+    <tr>
+        <th *ngFor="let user of week_users">
+            <h2>{{ user.first_name }}</h2>
+            <tr *ngFor="let date of dates" align="center">
+                <h4>{{ date | date: 'EEEE' }}</h4>
+                <select #project>
+                    <option *ngFor="let project of projects" [value]="project.id">
+                        <span>{{ project.name }}</span>
+                    </option>
+                </select>
+                <button (click)="assign(project.value, user.id, date)">Assign</button>
+                <div *ngFor="let assignment of user.qa_assignments">
+                    <div *ngIf="assignment.date == (date | date: 'EEEE')">
+                        <a href>{{ assignment.project.name }}</a>
+                    </div>
+                </div>
+                <br>
+                <br>
+            </tr>
+        </th>
+    </tr>
+</table>-->
+
+<div class="container container-outer">
+    <div class="container-inner">
+        <div *ngFor="let user of week_users" class="pull-left" style="margin-left: 20px">
+            <strong>{{ user.first_name }}</strong>
+            <div *ngFor="let date of dates" class="borderify">
+                <div *ngIf="!((date|date:'EEEE') === 'Saturday') && !((date|date:'EEEE') === 'Sunday')">
+                    {{ date | date: 'EEEE' }}
+                <!--<select>
+                    <option *ngFor="let project of projects" [value]="project.id">
+                        <span>{{ project.name }}</span>
+                    </option>
+                </select>-->
+                    <tag-input #project [(ngModel)]='user[date]' [identifyBy]="'id'" [displayBy]="'name'">
+                        <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="projects" [identifyBy]="'id'" [displayBy]="'name'">
+                        </tag-input-dropdown>
+                    </tag-input>
+                    <!--<input class="form-control" #project auto-complete [(ngModel)]="user[date]" [source]="projects" [value-formatter]="MyValueFormatter" [list-formatter]="MyListFormatter"/>-->
+                    <button class="btn btn-sm btn-success" (click)="assign(user[date], user.id, date)">Assign</button>
+                    
+                    <div *ngFor="let assignment of user.qa_assignments">
+                        <div *ngIf="assignment.date == (date | date: 'EEEE')">
+                            <a href>{{ assignment.project.name }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <h1><a routerLink="/pages/projects">Projects</a></h1>

@@ -6,4 +6,4 @@ export const routes: Routes = [
   { path: '**', redirectTo: 'pages/home' }
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: true });
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: false });

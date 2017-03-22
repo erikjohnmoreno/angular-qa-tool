@@ -1,12 +1,12 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
 import { GlobalState } from './global.state';
-import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
-import { BaThemeConfig } from './theme/theme.config';
-import { layoutPaths } from './theme/theme.constants';
+// import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
+// import { BaThemeConfig } from './theme/theme.config';
+// import { layoutPaths } from './theme/theme.constants';
 
-import 'style-loader!./app.scss';
-import 'style-loader!./theme/initial.scss';
+// import 'style-loader!./app.scss';
+// import 'style-loader!./theme/initial.scss';
 
 /*
  * App Component
@@ -14,42 +14,40 @@ import 'style-loader!./theme/initial.scss';
  */
 @Component({
   selector: 'app',
-  template: `
-    <main [ngClass]="{'menu-collapsed': isMenuCollapsed}" baThemeRun>
-      <div class="additional-bg"></div>
-      <router-outlet></router-outlet>
-    </main>
-  `
+  templateUrl: "app.component.html"
+  // template: `
+  //   <router-outlet></router-outlet>
+  // `
 })
 export class App {
 
-  isMenuCollapsed: boolean = false;
+  // isMenuCollapsed: boolean = false;
 
-  constructor(private _state: GlobalState,
-              private _imageLoader: BaImageLoaderService,
-              private _spinner: BaThemeSpinner,
-              private viewContainerRef: ViewContainerRef,
-              private themeConfig: BaThemeConfig) {
+  // constructor(private _state: GlobalState,
+  //             private _imageLoader: BaImageLoaderService,
+  //             private _spinner: BaThemeSpinner,
+  //             private viewContainerRef: ViewContainerRef,
+  //             private themeConfig: BaThemeConfig) {
 
-    themeConfig.config();
+  //   themeConfig.config();
 
-    this._loadImages();
+  //   this._loadImages();
 
-    this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
-      this.isMenuCollapsed = isCollapsed;
-    });
-  }
+  //   this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
+  //     this.isMenuCollapsed = isCollapsed;
+  //   });
+  // }
 
-  public ngAfterViewInit(): void {
-    // hide spinner once all loaders are completed
-    BaThemePreloader.load().then((values) => {
-      this._spinner.hide();
-    });
-  }
+  // public ngAfterViewInit(): void {
+  //   // hide spinner once all loaders are completed
+  //   BaThemePreloader.load().then((values) => {
+  //     this._spinner.hide();
+  //   });
+  // }
 
-  private _loadImages(): void {
-    // register some loaders
-    BaThemePreloader.registerLoader(this._imageLoader.load(layoutPaths.images.root + 'sky-bg.jpg'));
-  }
+  // private _loadImages(): void {
+  //   // register some loaders
+  //   BaThemePreloader.registerLoader(this._imageLoader.load(layoutPaths.images.root + 'sky-bg.jpg'));
+  // }
 
 }
