@@ -3,16 +3,27 @@
     .container-inner { width: 10000px; }
     .borderify {
         border-style: solid;
-        border-width: 2px;
+        border-width: 1px;
+    }
+
+    .day {
+        margin: 2px;
+    }
+
+    .project-list {
+        background-color: lightgray;
+    }
+
+    .qa-name {
+        background-color: lightblue;
+        border-style: solid;
+        border-width: 1px;
+    }
+    .panel {
+        padding-bottom: 5px;
     }
 </style>
-<h1><button class="btn btn-sm btn-info" (click)="previousWeek()">previous</button> {{ firstdate | date: 'yyyy-MM-dd' }} to {{ lastdate | date: 'yyyy-MM-dd' }} <button class="btn btn-sm btn-info" (click)="nextWeek()">next</button></h1>
 
-<div *ngFor="let error of errors">
-    <div *ngIf="is_error" class="alert alert-danger">
-        <strong>{{ error }}</strong>
-    </div>
-</div>
 <!--<table class="table table-bordered">
     <tr>
         <th *ngFor="let user of week_users">
@@ -38,28 +49,57 @@
 </table>-->
 
 <div class="container container-outer">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <h1>
+                    <button class="btn btn-info" (click)="previousWeek()"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></button> {{ firstdate | date: 'yyyy-MM-dd' }} to {{ lastdate | date: 'yyyy-MM-dd' }} <button class="btn btn-info" (click)="nextWeek()"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+                </h1>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngFor="let error of errors">
+        <div *ngIf="is_error" class="alert alert-danger">
+            <strong>{{ error }}</strong>
+        </div>
+    </div>
+
     <div class="container-inner">
-        <div *ngFor="let user of week_users" class="pull-left" style="margin-left: 20px">
-            <strong>{{ user.first_name }}</strong>
-            <div *ngFor="let date of dates" class="borderify">
-                <div *ngIf="!((date|date:'EEEE') === 'Saturday') && !((date|date:'EEEE') === 'Sunday')">
-                    {{ date | date: 'EEEE' }}
-                <!--<select>
-                    <option *ngFor="let project of projects" [value]="project.id">
-                        <span>{{ project.name }}</span>
-                    </option>
-                </select>-->
-                    <tag-input #project [(ngModel)]='user[date]' [identifyBy]="'id'" [displayBy]="'name'">
-                        <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="projects" [identifyBy]="'id'" [displayBy]="'name'">
-                        </tag-input-dropdown>
-                    </tag-input>
-                    <!--<input class="form-control" #project auto-complete [(ngModel)]="user[date]" [source]="projects" [value-formatter]="MyValueFormatter" [list-formatter]="MyListFormatter"/>-->
-                    <button class="btn btn-sm btn-success" (click)="assign(user[date], user.id, date)">Assign</button>
-                    
-                    <div *ngFor="let assignment of user.qa_assignments">
-                        <div *ngIf="assignment.date == (date | date: 'EEEE')">
-                            <a href>{{ assignment.project.name }}</a>
+        <div *ngFor="let user of week_users" class="pull-left" style="margin-right:10px">
+            <div class="qa-name"><strong><h2>{{ user.first_name }}</h2></strong></div>
+            <div style="background-color: gray; display: inline-block">
+                <div *ngFor="let date of dates" style="margin: 5px; background-color:white">
+                    <div class="borderify" *ngIf="!((date|date:'EEEE') === 'Saturday') && !((date|date:'EEEE') === 'Sunday')">
+                        <div class="day">
+                            <strong>{{ date | date: 'EEEE' }}</strong>
+                            <button class="btn btn-sm btn-primary pull-right" (click)="assign(user[date], user.id, date)">Assign</button>
                         </div>
+
+                        <tag-input #project [(ngModel)]='user[date]' 
+                                            [identifyBy]="'id'" 
+                                            [displayBy]="'name'" 
+                                            [secondaryPlaceholder]="'Enter Project Name'"
+                                            theme='bootstrap'>
+                                            
+                            <tag-input-dropdown [showDropdownIfEmpty]="true" 
+                                                [autocompleteItems]="projects" 
+                                                [identifyBy]="'id'" 
+                                                [displayBy]="'name'">
+                            </tag-input-dropdown>
+                        </tag-input>
+                        
+                        
+                        <div *ngFor="let assignment of user.qa_assignments">
+                            <div *ngIf="assignment.date == (date | date: 'EEEE')">
+                                <div class="project-list">
+                                    <button><i class="fa fa-times" aria-hidden="true"></i></button>
+                                    <strong>{{ assignment.project.name }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
                     </div>
                 </div>
             </div>

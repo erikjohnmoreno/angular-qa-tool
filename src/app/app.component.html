@@ -12,6 +12,7 @@
       <a class="navbar-brand" href="#" style="color:white">
         QA-Tool
       </a>
+      <a class="pull-right" *ngIf="sessionService.userSignedIn()" href (click)="signout()">Signout</a>
     </div>
   </div>
 </nav>

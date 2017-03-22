@@ -1,6 +1,7 @@
 import { Component, ViewContainerRef } from '@angular/core';
 
 import { GlobalState } from './global.state';
+import { SessionService } from './service/session.service';
 // import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
 // import { BaThemeConfig } from './theme/theme.config';
 // import { layoutPaths } from './theme/theme.constants';
@@ -50,4 +51,9 @@ export class App {
   //   BaThemePreloader.registerLoader(this._imageLoader.load(layoutPaths.images.root + 'sky-bg.jpg'));
   // }
 
+  constructor(private sessionService: SessionService) {}
+
+  public signout() {
+    this.sessionService.signout();
+  }
 }

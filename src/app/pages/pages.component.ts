@@ -32,8 +32,4 @@ export class Pages {
       //     })
 
   }
-  
-  public signout() {
-    this.sessionService.signout();
-  }
 }
